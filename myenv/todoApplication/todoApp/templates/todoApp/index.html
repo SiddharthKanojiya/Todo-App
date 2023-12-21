@@ -1,0 +1,46 @@
+
+<section class="vh-100" style="background-color: #eee;">
+<h1 class="text-center my-3 pb-3">To Do App</h4>
+<form method="POST" action="/">
+    {% csrf_token %}
+    {{form.title}}
+    <input class="btn btn-info" type="submit" name="Create Task">
+</form>
+              <table class="table mb-4">
+                <thead>
+                  <tr>
+                    <th scope="col"> </th>
+                    <th scope="col">Todo item</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                  <tr >
+                    <th scope="row">&#8710;</th>
+                    <td>{{task}}</td>
+                    <td>
+                        {% if task.complete == True %}
+                        Completed
+                        {% else %}
+                        In Progress
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">Update</a>
+			            <a class="btn btn-sm btn-danger" href="{% url 'delete' task.id %}">Delete</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+  
+        
+  </section>
+
+
+
+  
+    
